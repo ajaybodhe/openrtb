@@ -1,5 +1,7 @@
 package response
 
+//go:generate ffjson $GOFILE
+
 import "github.com/bsm/openrtb"
 
 // Corresponds to the Asset Object in the request. The main container object for

@@ -1,5 +1,7 @@
 package openrtb
 
+//go:generate ffjson $GOFILE
+
 type Inventory struct {
 	ID            string     `json:"id,omitempty"` // ID on the exchange
 	Name          string     `json:"name,omitempty"`

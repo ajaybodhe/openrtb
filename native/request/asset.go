@@ -1,5 +1,7 @@
 package request
 
+//go:generate ffjson $GOFILE
+
 import "github.com/bsm/openrtb"
 
 // The main container object for each asset requested or supported by Exchange

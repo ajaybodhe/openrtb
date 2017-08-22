@@ -1,5 +1,7 @@
 package openrtb
 
+//go:generate ffjson $GOFILE
+
 // 5.2 Banner Ad Types
 const (
 	BannerTypeXHTMLText = 1

@@ -1,5 +1,7 @@
 package openrtb
 
+//go:generate ffjson $GOFILE
+
 import "errors"
 
 // Extension is a raw encoded JSON value.

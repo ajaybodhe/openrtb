@@ -1,5 +1,7 @@
 package request
 
+//go:generate ffjson $GOFILE
+
 import "github.com/bsm/openrtb"
 
 // TODO unclear if its the same as imp.video https://github.com/openrtb/OpenRTB/issues/26

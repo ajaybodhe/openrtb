@@ -1,5 +1,7 @@
 package openrtb
 
+//go:generate ffjson $GOFILE
+
 // The "device" object provides information pertaining to the device including its hardware,
 // platform, location, and carrier. This device can refer to a mobile handset, a desktop computer,
 // set top box or other digital device.

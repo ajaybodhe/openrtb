@@ -1,5 +1,7 @@
 package response
 
+//go:generate ffjson $GOFILE
+
 import "github.com/bsm/openrtb"
 
 // The native object is the top level JSON object which identifies a native response

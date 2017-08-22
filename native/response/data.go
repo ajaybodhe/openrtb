@@ -1,5 +1,7 @@
 package response
 
+//go:generate ffjson $GOFILE
+
 import "github.com/bsm/openrtb"
 
 type Data struct {

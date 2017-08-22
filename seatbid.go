@@ -1,5 +1,7 @@
 package openrtb
 
+//go:generate ffjson $GOFILE
+
 import "errors"
 
 // At least one of Bid is required.

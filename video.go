@@ -1,5 +1,7 @@
 package openrtb
 
+//go:generate ffjson $GOFILE
+
 import (
 	"encoding/json"
 	"errors"

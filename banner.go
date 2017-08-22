@@ -1,5 +1,7 @@
 package openrtb
 
+//go:generate ffjson $GOFILE
+
 // The "banner" object must be included directly in the impression object if the impression offered
 // for auction is display or rich media, or it may be optionally embedded in the video object to
 // describe the companion banners available for the linear or non-linear video ad.  The banner
