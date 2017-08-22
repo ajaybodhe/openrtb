@@ -37,7 +37,7 @@ type BidRequest struct {
 	Ext         Extension    `json:"ext,omitempty"`
 
 	Pmp *Pmp `json:"pmp,omitempty"` // DEPRECATED: kept for backwards compatibility
-	
+
 	TD map[string]float64 `json:"-"` // Time details for local use
 }
 

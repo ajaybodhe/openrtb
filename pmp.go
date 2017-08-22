@@ -2,7 +2,6 @@ package openrtb
 
 //go:generate ffjson $GOFILE
 
-
 // Private Marketplace Object
 type Pmp struct {
 	Private int       `json:"private_auction,omitempty"`
