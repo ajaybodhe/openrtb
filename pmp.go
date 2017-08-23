@@ -23,6 +23,69 @@ type Deal struct {
 	Type  int      `json:"type,omitempty"`  // DEPRECATED: kept for backwards compatibility
 }
 
+func (d *Deal) Reset() {
+	d.ID = ""
+	d.BidFloor = 0.0
+	d.BidFloorCurrency = ""
+	if d.WSeat != nil {
+		d.WSeat = d.WSeat[:0]
+	}
+	if d.WAdvDomain != nil {
+		d.WAdvDomain = d.WAdvDomain[:0]
+	}
+	d.Type = 0
+	d.AuctionType = 0
+	if d.Ext != nil {
+		d.Ext = d.Ext[:0]
+	}
+	if d.Seats != nil {
+		d.Seats = d.Seats[:0]
+	}
+}
+
+//var dealPool = sync.Pool{
+//	New: func() interface{} {
+//		return new(Deal)
+//	},
+//}
+//
+//func NewDeal() *Deal{
+//	return dealPool.Get().(*Deal)
+//}
+//
+//func FreeDeal(d *Deal) {
+//	d.Reset()
+//	dealPool.Put(d)
+//}
+
+func (p *Pmp) Reset() {
+	p.Private = 0
+	if p.Deals != nil {
+		for i:=0; i<len(p.Deals); i++ {
+			(&p.Deals[i]).Reset()
+		}
+		p.Deals = p.Deals[:0]
+	}
+	if p.Ext != nil {
+		p.Ext = p.Ext[:0]
+	}
+}
+
+//var pmpPool = sync.Pool{
+//	New: func() interface{} {
+//		return new(Pmp)
+//	},
+//}
+//
+//func NewPmp() *Pmp{
+//	return pmpPool.Get().(*Pmp)
+//}
+//
+//func FreePmp(p *Pmp) {
+//	p.Reset()
+//	pmpPool.Put(p)
+//}
+
 //type jsonDeal Deal
 
 // MarshalJSON custom marshalling with normalization

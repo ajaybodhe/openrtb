@@ -35,3 +35,41 @@ type Content struct {
 	Data               []Data    `json:"data,omitempty"`               // Additional content data.
 	Ext                Extension `json:"ext,omitempty"`
 }
+func (c *Content) Reset() {
+	if c.Data != nil {
+		for i:=0; i<len(c.Data); i++ {
+			(&c.Data[i]).Reset()
+		}
+		c.Data = c.Data[:0]
+	}
+	if c.Ext != nil {
+		c.Ext = c.Ext[:0]
+	}
+	c.Embeddable = 0
+	c.Language = ""
+	c.Len = 0
+	c.SourceRelationship = 0
+	c.LiveStream = 0
+	c.Keywords = ""
+	c.QAGMediaRating = 0
+	c.UserRating = ""
+	c.ContentRating = ""
+	c.VideoQuality = 0
+	c.ProdQuality = 0
+	if c.Cat != nil {
+		c.Cat = c.Cat[:0]
+	}
+	c.URL = ""
+	if c.Producer != nil {
+		c.Producer.Reset()
+	}
+	c.ISRC = ""
+	c.Genre = ""
+	c.Artist = ""
+	c.Album = ""
+	c.Series = ""
+	c.Season = ""
+	c.Title = ""
+	c.Episode = 0
+	c.ID = ""
+}

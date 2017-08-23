@@ -9,3 +9,12 @@ type Source struct {
 	PaymentChain      string    `json:"pchain,omitempty"` // Payment ID chain string containing embedded syntax described in the TAG Payment ID Protocol v1.0.
 	Ext               Extension `json:"ext,omitempty"`    // Placeholder for exchange-specific extensions to OpenRTB.
 }
+
+func (s *Source) Reset() {
+	s.FinalSaleDecision = 0
+	s.PaymentChain = ""
+	s.TransactionID = ""
+	if s.Ext != nil {
+		s.Ext = s.Ext[:0]
+	}
+}

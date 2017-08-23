@@ -26,3 +26,55 @@ type Banner struct {
 	Api      []int     `json:"api,omitempty"`      // List of supported API frameworks
 	Ext      Extension `json:"ext,omitempty"`
 }
+
+func (bn *Banner) Reset() {
+	bn.W = 0
+	bn.H = 0
+	if bn.Format != nil {
+		for i:=0; i<len(bn.Format); i++ {
+			(&bn.Format[i]).Reset()
+		}
+		bn.Format = bn.Format[:0]
+	}
+	bn.WMax = 0
+	bn.HMax = 0
+	bn.WMin = 0
+	bn.HMin = 0
+	bn.ID = ""
+	bn.TopFrame = 0
+	if bn.BType != nil {
+		bn.BType = bn.BType[:0]
+	}
+	if bn.BAttr != nil {
+		bn.BAttr = bn.BAttr[:0]
+	}
+	bn.Pos = 0
+	if bn.Mimes != nil {
+		bn.Mimes = bn.Mimes[:0]
+	}
+	if bn.ExpDir != nil {
+		bn.ExpDir = bn.ExpDir[:0]
+	}
+	if bn.Api != nil {
+		bn.Api = bn.Api[:0]
+	}
+	if bn.Ext !=nil {
+		bn.Ext = bn.Ext[:0]
+	}
+}
+
+
+//var bannerPool = sync.Pool{
+//	New: func() interface{} {
+//		return new(Banner)
+//	},
+//}
+//
+//func NewBanner() *Banner{
+//	return bannerPool.Get().(*Banner)
+//}
+//
+//func FreeBanner(bn *Banner) {
+//	bn.Reset()
+//	bannerPool.Put(bn)
+//}

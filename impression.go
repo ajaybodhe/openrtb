@@ -2,7 +2,9 @@ package openrtb
 
 //go:generate ffjson $GOFILE
 
-import "errors"
+import (
+	"errors"
+)
 
 // Validation errors
 var (
@@ -36,6 +38,56 @@ type Impression struct {
 	Ext               Extension      `json:"ext,omitempty"`
 }
 
+func (imp *Impression) Reset() {
+	imp.ID = ""
+	imp.DisplayManager = ""
+	imp.DisplayManagerVer = ""
+	imp.Instl = 0
+	imp.TagID = ""
+	imp.BidFloor = 0.0
+	imp.BidFloorCurrency = ""
+	imp.Secure = 0
+	imp.Exp = 0
+	imp.IFrameBuster = nil
+	if imp.Ext != nil {
+		imp.Ext = imp.Ext[:0]
+	}
+	if imp.Pmp != nil {
+		imp.Pmp.Reset()
+	}
+	if imp.Audio != nil {
+		imp.Audio.Reset()
+	}
+	if imp.Banner != nil {
+		imp.Banner.Reset()
+	}
+	if imp.Video != nil {
+		imp.Video.Reset()
+	}
+	if imp.Native != nil {
+		imp.Native.Reset()
+	}
+}
+
+//var impressionSlicePool = sync.Pool{
+//	New: func() interface{} {
+//		imps := &([]Impression{})
+//		return imps
+//	},
+//}
+//
+//func NewImpressionSlice() *[]Impression{
+//	return impressionSlicePool.Get().(*[]Impression)
+//}
+//
+//func FreeImpressionSlice(imps *[]Impression) {
+//	for i:=0; i<len(*imps); i++ {
+//		(&((*imps)[i])).Reset()
+//	}
+//	(*imps) = (*imps)[:0]
+//	impressionSlicePool.Put(imps)
+//}
+
 func (imp *Impression) assetCount() int {
 	n := 0
 	if imp.Banner != nil {
@@ -68,3 +120,4 @@ func (imp *Impression) Validate() error {
 
 	return nil
 }
+ 

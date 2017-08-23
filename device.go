@@ -38,3 +38,41 @@ type Device struct {
 	MacMD5     string    `json:"macmd5,omitempty"`         // MD5 hashed device ID; IMEI when available, else MEID or ESN
 	Ext        Extension `json:"ext,omitempty"`
 }
+
+func (d *Device) Reset() {
+	d.MacMD5 = ""
+	d.MacSHA1 = ""
+	if d.Ext != nil {
+		d.Ext = d.Ext[:0]
+	}
+	d.PIDMD5 =""
+	d.PIDSHA1 = ""
+	d.IDSHA1 = ""
+	d.IDMD5 = ""
+	d.IFA = ""
+	d.FlashVer = ""
+	d.LMT = 0
+	d.Carrier = ""
+	d.MCCMNC = ""
+	d.ConnType = 0
+	d.HwVer = ""
+	d.H = 0
+	d.W = 0
+	d.PPI = 0
+	d.PxRatio = 0.0
+	d.JS = 0
+	d.GeoFetch = 0
+	d.UA = ""
+	if d.Geo != nil {
+		d.Geo.Reset()
+	}
+	d.DNT = 0
+	d.LMT = 0
+	d.IP = ""
+	d.IPv6 = ""
+	d.DeviceType = 0
+	d.Make = ""
+	d.Model = ""
+	d.OS = ""
+	d.OSVer = ""
+}

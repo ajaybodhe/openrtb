@@ -47,6 +47,73 @@ type Video struct {
 	Ext            Extension `json:"ext,omitempty"`
 }
 
+func (vid *Video) Reset() {
+	vid.BoxingAllowed = nil
+	if vid.CompanionType != nil {
+		vid.CompanionType = vid.CompanionType[:0]
+	}
+	if vid.Api != nil {
+		vid.Api = vid.Api[:0]
+	}
+	vid.Pos = 0
+	vid.Placement = 0
+	if vid.CompanionAd != nil {
+		for i:=0; i<len(vid.CompanionAd); i ++ {
+			(&vid.CompanionAd[i]).Reset()
+		}
+		vid.CompanionAd = vid.CompanionAd[:0]
+	}
+	if vid.Delivery != nil {
+		vid.Delivery = vid.Delivery[:0]
+	}
+	if vid.Ext  != nil {
+		vid.Ext = vid.Ext[:0]
+	}
+	if vid.PlaybackMethod != nil {
+		vid.PlaybackMethod = vid.PlaybackMethod[:0]
+	}
+	vid.MinBitrate = 0
+	vid.MaxDuration = 0
+	vid.MaxBitrate = 0
+	vid.MaxExtended = 0
+	if vid.BAttr != nil {
+		vid.BAttr = vid.BAttr[:0]
+	}
+	vid.Linearity = 0
+	vid.Sequence = 0
+	vid.Skip = 0
+	vid.SkipAfter = 0
+	vid.SkipMin = 0
+	vid.StartDelay = 0
+	vid.W = 0
+	vid.H = 0
+	vid.Protocol = 0
+	vid.MinDuration = 0
+	vid.MaxDuration = 0
+	if vid.Protocols != nil {
+		vid.Protocols = vid.Protocols[:0]
+	}
+	if vid.Mimes != nil {
+		vid.Mimes = vid.Mimes[:0]
+	}
+}
+
+
+//var videoPool = sync.Pool{
+//	New: func() interface{} {
+//		return new(Video)
+//	},
+//}
+//
+//func NewVideo() *Video{
+//	return videoPool.Get().(*Video)
+//}
+//
+//func FreeVideo(vid *Video) {
+//	vid.Reset()
+//	videoPool.Put(vid)
+//}
+
 type jsonVideo Video
 
 // Validates the object

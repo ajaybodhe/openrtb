@@ -16,3 +16,35 @@ type Native struct {
 	BAttr   []int     `json:"battr,omitempty"` // Blocked creative attributes
 	Ext     Extension `json:"ext,omitempty"`
 }
+
+
+func (nt *Native) Reset() {
+	if nt.Request != nil {
+		nt.Request = nt.Request[:0]
+	}
+	if nt.API != nil {
+		nt.API = nt.API[:0]
+	}
+	nt.Ver = ""
+	if nt.BAttr != nil {
+		nt.BAttr = nt.BAttr[:0]
+	}
+	if nt.Ext != nil {
+		nt.Ext = nt.Ext[:0]
+	}
+}
+
+//var nativePool = sync.Pool{
+//	New: func() interface{} {
+//		return new(Native)
+//	},
+//}
+//
+//func NewNative() *Native{
+//	return nativePool.Get().(*Native)
+//}
+//
+//func FreeNative(nt *Native) {
+//	nt.Reset()
+//	nativePool.Put(nt)
+//}

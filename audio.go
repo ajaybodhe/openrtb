@@ -35,6 +35,61 @@ type Audio struct {
 	Ext           Extension `json:"ext,omitempty"`
 }
 
+func (au *Audio) Reset() {
+	if au.Ext != nil {
+		au.Ext = au.Ext[:0]
+	}
+	if au.API != nil {
+		au.API = au.API[:0]
+	}
+	if au.CompanionType != nil {
+		au.CompanionType = au.CompanionType[:0]
+	}
+	if au.BAttr != nil {
+		au.BAttr = au.BAttr[:0]
+	}
+	if au.CompanionAd != nil {
+		for i:=0; i<len(au.CompanionAd); i ++ {
+			(&au.CompanionAd[i]).Reset()
+		}
+		au.CompanionAd = au.CompanionAd[:0]
+	}
+	if au.Delivery != nil {
+		au.Delivery = au.Delivery[:0]
+	}
+	au.Feed = 0
+	au.Stitched = 0
+	au.NVol = 0
+	au.StartDelay = 0
+	au.Sequence = 0
+	au.MaxBitrate = 0
+	au.MaxExtended = 0
+	au.MaxSequence = 0
+	if au.Protocols != nil {
+		au.Protocols = au.Protocols[:0]
+	}
+	au.MinBitrate = 0
+	au.MaxDuration = 0
+	if au.Mimes != nil {
+		au.Mimes = au.Mimes[:0]
+	}
+}
+
+//var audioPool = sync.Pool{
+//	New: func() interface{} {
+//		return new(Audio)
+//	},
+//}
+//
+//func NewAudio() *Audio{
+//	return audioPool.Get().(*Audio)
+//}
+//
+//func FreeAudio(au *Audio) {
+//	au.Reset()
+//	audioPool.Put(au)
+//}
+
 type jsonAudio Audio
 
 // Validates the object

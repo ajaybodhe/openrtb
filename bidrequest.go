@@ -2,7 +2,10 @@ package openrtb
 
 //go:generate ffjson $GOFILE
 
-import "errors"
+import (
+	"errors"
+	"sync"
+)
 
 // Validation errors
 var (
@@ -39,6 +42,81 @@ type BidRequest struct {
 	Pmp *Pmp `json:"pmp,omitempty"` // DEPRECATED: kept for backwards compatibility
 
 	TD map[string]float64 `json:"-"` // Time details for local use
+}
+
+func (br *BidRequest) Reset() {
+	if br.Bcat != nil {
+		br.Bcat = br.Bcat[:0]
+	}
+	br.TD  = nil
+	if br.Ext != nil {
+		br.Ext = br.Ext[:0]
+	}
+	if br.Pmp != nil {
+		br.Pmp.Reset()
+	}
+	if br.Regs != nil {
+		br.Regs.Reset()
+	}
+	if br.Source != nil {
+		br.Source.Reset()
+	}
+	if br.BApp != nil {
+		br.BApp = br.BApp[:0]
+	}
+	if br.BAdv != nil {
+		br.BAdv = br.BAdv[:0]
+	}
+	if br.Cur != nil {
+		br.Cur = br.Cur[:0]
+	}
+	if br.WLang != nil {
+		br.WLang = br.WLang[:0]
+	}
+	if br.BSeat != nil {
+		br.BSeat = br.BSeat[:0]
+	}
+	if br.WSeat != nil {
+		br.WSeat = br.WSeat[:0]
+	}
+	br.ID = ""
+	br.Test = 0
+	br.TMax = 0
+	br.AllImps = 0
+	br.AuctionType = 0
+	if br.User != nil {
+		br.User.Reset()
+	}
+	if br.Device != nil {
+		br.Device.Reset()
+	}
+	if br.App != nil {
+		br.App.Reset()
+	}
+	if br.Site != nil {
+		br.Site.Reset()
+	}
+	if br.Imp != nil {
+		for i:=0; i<len(br.Imp); i ++ {
+			(&br.Imp[i]).Reset()
+		}
+		br.Imp = br.Imp[:0]
+	}
+}
+
+var bidRequestPool = sync.Pool{
+	New: func() interface{} {
+		return new(BidRequest)
+	},
+}
+
+func NewBidRequest() *BidRequest{
+	return bidRequestPool.Get().(*BidRequest)
+}
+
+func FreeBidRequest(br *BidRequest) {
+	br.Reset()
+	bidRequestPool.Put(br)
 }
 
 // Validates the request

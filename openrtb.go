@@ -212,11 +212,35 @@ type ThirdParty struct {
 // provided. If an optional parameter is not specified, it should be considered unknown.
 type Publisher ThirdParty
 
+func (p *Publisher) Reset(){
+	p.ID = ""
+	p.Name = ""
+	p.Domain = ""
+	if p.Cat != nil {
+		p.Cat = p.Cat[:0]
+	}
+	if p.Ext != nil {
+		p.Ext = p.Ext[:0]
+	}
+}
+
 // The producer is useful when content where the ad is shown is syndicated, and may appear on a
 // completely different publisher. The producer object itself and all of its parameters are optional,
 // so default values are not provided. If an optional parameter is not specified, it should be
 // considered unknown.
 type Producer ThirdParty
+
+func (p *Producer) Reset(){
+	p.ID = ""
+	p.Name = ""
+	p.Domain = ""
+	if p.Cat != nil {
+		p.Cat = p.Cat[:0]
+	}
+	if p.Ext != nil {
+		p.Ext = p.Ext[:0]
+	}
+}
 
 // Note that the Geo Object may appear in one or both the Device Object and the User Object.
 // This is intentional, since the information may be derived from either a device-oriented source
@@ -239,6 +263,25 @@ type Geo struct {
 	Ext           Extension `json:"ext,omitempty"`
 }
 
+func (g *Geo) Reset() {
+	g.Lat = 0.0
+	g.Lon = 0.0
+	g.Type = 0
+	g.Accuracy = 0
+	g.LastFix = 0
+	g.IPService = 0
+	g.City = ""
+	g.Country = ""
+	g.Region = ""
+	g.RegionFIPS104 = ""
+	g.Metro = ""
+	g.Zip= ""
+	g.UTCOffset = 0
+	if g.Ext != nil {
+		g.Ext = g.Ext[:0]
+	}
+}
+
 // This object contains information known or derived about the human user of the device (i.e., the
 // audience for advertising). The user id is an exchange artifact and may be subject to rotation or other
 // privacy policies. However, this user ID must be stable long enough to serve reasonably as the basis for
@@ -256,6 +299,28 @@ type User struct {
 	Ext        Extension `json:"ext,omitempty"`
 }
 
+func (u *User) Reset() {
+	u.ID=""
+	u.BuyerID =""
+	u.BuyerUID=""
+	u.YOB=0
+	u.Gender=""
+	u.Keywords=""
+	u.CustomData=""
+	if u.Geo != nil {
+		u.Geo.Reset()
+	}
+	if u.Data != nil {
+		for i:=0; i<len(u.Data); i ++ {
+			(&u.Data[i]).Reset()
+		}
+		u.Data = u.Data[:0]
+	}
+	if u.Ext != nil {
+		u.Ext = u.Ext[:0]
+	}
+}
+
 // The data and segment objects together allow additional data about the user to be specified. This data
 // may be from multiple sources whether from the exchange itself or third party providers as specified by
 // the id field. A bid request can mix data objects from multiple providers. The specific data providers in
@@ -265,6 +330,20 @@ type Data struct {
 	Name    string    `json:"name,omitempty"`
 	Segment []Segment `json:"segment,omitempty"`
 	Ext     Extension `json:"ext,omitempty"`
+}
+
+func (d *Data) Reset() {
+	d.ID=""
+	d.Name=""
+	if d.Segment != nil {
+		for i:=0; i<len(d.Segment); i ++ {
+			(&d.Segment[i]).Reset()
+		}
+		d.Segment = d.Segment[:0]
+	}
+	if d.Ext != nil {
+		d.Ext = d.Ext[:0]
+	}
 }
 
 // Segment objects are essentially key-value pairs that convey specific units of data about the user. The
@@ -277,6 +356,15 @@ type Segment struct {
 	Ext   Extension `json:"ext,omitempty"`
 }
 
+func (s *Segment) Reset() {
+	s.ID = ""
+	s.Name = ""
+	s.Value = ""
+	if s.Ext != nil {
+		s.Ext = s.Ext[:0]
+	}
+}
+
 // This object contains any legal, governmental, or industry regulations that apply to the request. The
 // coppa flag signals whether or not the request falls under the United States Federal Trade Commission's
 // regulations for the United States Children's Online Privacy Protection Act ("COPPA").
@@ -285,10 +373,25 @@ type Regulations struct {
 	Ext   Extension `json:"ext,omitempty"`
 }
 
+func (r *Regulations) Reset() {
+	r.Coppa = 0
+	if r.Ext != nil {
+		r.Ext = r.Ext[:0]
+	}
+}
+
 // This object represents an allowed size (i.e., height and width combination) for a banner impression.
 // These are typically used in an array for an impression where multiple sizes are permitted.
 type Format struct {
 	W   int       `json:"w,omitempty"` // Width in device independent pixels (DIPS).
 	H   int       `json:"h,omitempty"` //Height in device independent pixels (DIPS).
 	Ext Extension `json:"ext,omitempty"`
+}
+
+func (f *Format) Reset() {
+	f.W = 0
+	f.H = 0
+	if f.Ext != nil {
+		f.Ext = f.Ext[:0]
+	}
 }
