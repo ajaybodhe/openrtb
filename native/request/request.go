@@ -2,7 +2,10 @@ package request
 
 //go:generate ffjson $GOFILE
 
-import "github.com/bsm/openrtb"
+import (
+	"github.com/bsm/openrtb"
+	"sync"
+)
 
 type LayoutID int
 
@@ -78,4 +81,39 @@ type Request struct {
 	Sequence         int               `json:"seq,omitempty"`            // 0 for the first ad, 1 for the second ad, and so on
 	Assets           []Asset           `json:"assets"`                   // An array of Asset Objects
 	Ext              openrtb.Extension `json:"ext,omitempty"`
+}
+
+func (nr *Request) Reset() {
+	if nr.Assets != nil {
+		for i := 0; i < len(nr.Assets); i++ {
+			(&nr.Assets[i]).Reset()
+		}
+		nr.Assets = nr.Assets[:0]
+	}
+	if nr.Ext != nil {
+		nr.Ext = nr.Ext[:0]
+	}
+	nr.Sequence = 0
+	nr.PlacementTypeID = 0
+	nr.PlacementCount = 0
+	nr.ContextSubTypeID = 0
+	nr.ContextTypeID = 0
+	nr.AdUnitID = 0
+	nr.Ver = ""
+	nr.LayoutID = 0
+}
+
+var nativeRequestPool = sync.Pool{
+	New: func() interface{} {
+		return new(Request)
+	},
+}
+
+func NewNativeRequest() *Request {
+	return nativeRequestPool.Get().(*Request)
+}
+
+func FreeNativeRequest(nr *Request) {
+	nr.Reset()
+	nativeRequestPool.Put(nr)
 }

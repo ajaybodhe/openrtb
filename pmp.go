@@ -61,7 +61,7 @@ func (d *Deal) Reset() {
 func (p *Pmp) Reset() {
 	p.Private = 0
 	if p.Deals != nil {
-		for i:=0; i<len(p.Deals); i++ {
+		for i := 0; i < len(p.Deals); i++ {
 			(&p.Deals[i]).Reset()
 		}
 		p.Deals = p.Deals[:0]

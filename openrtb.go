@@ -212,7 +212,7 @@ type ThirdParty struct {
 // provided. If an optional parameter is not specified, it should be considered unknown.
 type Publisher ThirdParty
 
-func (p *Publisher) Reset(){
+func (p *Publisher) Reset() {
 	p.ID = ""
 	p.Name = ""
 	p.Domain = ""
@@ -230,7 +230,7 @@ func (p *Publisher) Reset(){
 // considered unknown.
 type Producer ThirdParty
 
-func (p *Producer) Reset(){
+func (p *Producer) Reset() {
 	p.ID = ""
 	p.Name = ""
 	p.Domain = ""
@@ -275,7 +275,7 @@ func (g *Geo) Reset() {
 	g.Region = ""
 	g.RegionFIPS104 = ""
 	g.Metro = ""
-	g.Zip= ""
+	g.Zip = ""
 	g.UTCOffset = 0
 	if g.Ext != nil {
 		g.Ext = g.Ext[:0]
@@ -300,18 +300,18 @@ type User struct {
 }
 
 func (u *User) Reset() {
-	u.ID=""
-	u.BuyerID =""
-	u.BuyerUID=""
-	u.YOB=0
-	u.Gender=""
-	u.Keywords=""
-	u.CustomData=""
+	u.ID = ""
+	u.BuyerID = ""
+	u.BuyerUID = ""
+	u.YOB = 0
+	u.Gender = ""
+	u.Keywords = ""
+	u.CustomData = ""
 	if u.Geo != nil {
 		u.Geo.Reset()
 	}
 	if u.Data != nil {
-		for i:=0; i<len(u.Data); i ++ {
+		for i := 0; i < len(u.Data); i++ {
 			(&u.Data[i]).Reset()
 		}
 		u.Data = u.Data[:0]
@@ -333,10 +333,10 @@ type Data struct {
 }
 
 func (d *Data) Reset() {
-	d.ID=""
-	d.Name=""
+	d.ID = ""
+	d.Name = ""
 	if d.Segment != nil {
-		for i:=0; i<len(d.Segment); i ++ {
+		for i := 0; i < len(d.Segment); i++ {
 			(&d.Segment[i]).Reset()
 		}
 		d.Segment = d.Segment[:0]

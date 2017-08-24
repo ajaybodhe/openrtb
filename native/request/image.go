@@ -24,3 +24,17 @@ type Image struct {
 	Mimes []string          `json:"mimes,omitempty"` // Whitelist of content MIME types supported
 	Ext   openrtb.Extension `json:"ext,omitempty"`
 }
+
+func (i *Image) Reset() {
+	i.TypeID = 0
+	i.Width = 0
+	i.WidthMin = 0
+	i.Height = 0
+	i.HeightMin = 0
+	if i.Mimes != nil {
+		i.Mimes = i.Mimes[:0]
+	}
+	if i.Ext != nil {
+		i.Ext = i.Ext[:0]
+	}
+}

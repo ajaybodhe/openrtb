@@ -49,7 +49,7 @@ func (au *Audio) Reset() {
 		au.BAttr = au.BAttr[:0]
 	}
 	if au.CompanionAd != nil {
-		for i:=0; i<len(au.CompanionAd); i ++ {
+		for i := 0; i < len(au.CompanionAd); i++ {
 			(&au.CompanionAd[i]).Reset()
 		}
 		au.CompanionAd = au.CompanionAd[:0]

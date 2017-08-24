@@ -10,3 +10,12 @@ type Image struct {
 	Height int               `json:"h,omitempty"`   // Height of the image in pixels
 	Ext    openrtb.Extension `json:"ext,omitempty"`
 }
+
+func (i *Image) Reset() {
+	i.URL = ""
+	i.Width = 0
+	i.Height = 0
+	if i.Ext != nil {
+		i.Ext = i.Ext[:0]
+	}
+}

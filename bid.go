@@ -47,6 +47,45 @@ type Bid struct {
 	Ext            Extension      `json:"ext,omitempty"`
 }
 
+func (b *Bid) Reset() {
+	if b.Ext != nil {
+		b.Ext = b.Ext[:0]
+	}
+	b.Exp = 0
+	b.WRatio = 0
+	b.HRatio = 0
+	b.H = 0
+	b.W = 0
+	b.DealID = ""
+	b.Language = ""
+	b.QAGMediaRating = 0
+	b.Protocol = 0
+	b.API = 0
+	if b.Attr != nil {
+		b.Attr = b.Attr[:0]
+	}
+	if b.Cat != nil {
+		b.Cat = b.Cat[:0]
+	}
+	b.Tactic = ""
+	b.CreativeID = ""
+	b.CampaignID = ""
+	b.IURL = ""
+	if b.AdvDomain != nil {
+		b.AdvDomain = b.AdvDomain[:0]
+	}
+	b.AdMarkup = ""
+	b.LURL = ""
+	b.BURL = ""
+	b.Bundle = ""
+	b.NURL = ""
+	b.AdID = ""
+	b.AdID = ""
+	b.Price = 0.0
+	b.ImpID = ""
+	b.ID = ""
+}
+
 // Validate required attributes
 func (bid *Bid) Validate() error {
 	if bid.ID == "" {

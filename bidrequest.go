@@ -48,7 +48,7 @@ func (br *BidRequest) Reset() {
 	if br.Bcat != nil {
 		br.Bcat = br.Bcat[:0]
 	}
-	br.TD  = nil
+	br.TD = nil
 	if br.Ext != nil {
 		br.Ext = br.Ext[:0]
 	}
@@ -97,7 +97,7 @@ func (br *BidRequest) Reset() {
 		br.Site.Reset()
 	}
 	if br.Imp != nil {
-		for i:=0; i<len(br.Imp); i ++ {
+		for i := 0; i < len(br.Imp); i++ {
 			(&br.Imp[i]).Reset()
 		}
 		br.Imp = br.Imp[:0]
@@ -110,7 +110,7 @@ var bidRequestPool = sync.Pool{
 	},
 }
 
-func NewBidRequest() *BidRequest{
+func NewBidRequest() *BidRequest {
 	return bidRequestPool.Get().(*BidRequest)
 }
 

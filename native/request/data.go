@@ -27,3 +27,11 @@ type Data struct {
 	Length int               `json:"len"`  // Maximum length of the text in the element’s response
 	Ext    openrtb.Extension `json:"ext,omitempty"`
 }
+
+func (d *Data) Reset() {
+	d.TypeID = 0
+	d.Length = 0
+	if d.Ext != nil {
+		d.Ext = d.Ext[:0]
+	}
+}

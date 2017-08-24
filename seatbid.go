@@ -17,6 +17,20 @@ type SeatBid struct {
 	Ext   Extension `json:"ext,omitempty"`
 }
 
+func (s *SeatBid) Reset() {
+	s.Seat = ""
+	s.Group = 0
+	if s.Ext != nil {
+		s.Ext = s.Ext[:0]
+	}
+	if s.Bid != nil {
+		for i := 0; i < len(s.Bid); i++ {
+			(&s.Bid[i]).Reset()
+		}
+		s.Bid = s.Bid[:0]
+	}
+}
+
 // Validation errors
 var (
 	ErrInvalidSeatBidBid = errors.New("openrtb: seatbid is missing bids")

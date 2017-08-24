@@ -10,3 +10,14 @@ type Link struct {
 	FallbackURL   string            `json:"fallback,omitempty"` // Fallback URL for deeplink. To be used if the URL given in url is not supported by the device.
 	Ext           openrtb.Extension `json:"ext,omitempty"`
 }
+
+func (l *Link) Reset() {
+	l.URL = ""
+	if l.ClickTrackers != nil {
+		l.ClickTrackers = l.ClickTrackers[:0]
+	}
+	if l.Ext != nil {
+		l.Ext = l.Ext[:0]
+	}
+	l.FallbackURL = ""
+}

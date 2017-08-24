@@ -45,7 +45,7 @@ func (d *Device) Reset() {
 	if d.Ext != nil {
 		d.Ext = d.Ext[:0]
 	}
-	d.PIDMD5 =""
+	d.PIDMD5 = ""
 	d.PIDSHA1 = ""
 	d.IDSHA1 = ""
 	d.IDMD5 = ""

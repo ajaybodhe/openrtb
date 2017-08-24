@@ -2,7 +2,10 @@ package openrtb
 
 //go:generate ffjson $GOFILE
 
-import "errors"
+import (
+	"errors"
+	"sync"
+)
 
 // Validation errors
 var (
@@ -23,6 +26,39 @@ type BidResponse struct {
 	NBR        int                `json:"nbr,omitempty"`        // Reason for not bidding, where 0 = unknown error, 1 = technical error, 2 = invalid request, 3 = known web spider, 4 = suspected Non-Human Traffic, 5 = cloud, data center, or proxy IP, 6 = unsupported device, 7 = blocked publisher or site, 8 = unmatched user
 	Ext        Extension          `json:"ext,omitempty"`        // Custom specifications in JSon
 	TD         map[string]float64 `json:"-"`                    // time detail logging for local use
+}
+
+func (br *BidResponse) Reset() {
+	br.NBR = 0
+	br.CustomData = ""
+	br.Currency = ""
+	br.BidID = ""
+	br.TD = nil
+	if br.Ext != nil {
+		br.Ext = br.Ext[:0]
+	}
+	br.ID = ""
+	if br.SeatBid != nil {
+		for i := 0; i < len(br.SeatBid); i++ {
+			(&br.SeatBid[i]).Reset()
+		}
+		br.SeatBid = br.SeatBid[:0]
+	}
+}
+
+var bidResponsePool = sync.Pool{
+	New: func() interface{} {
+		return new(BidRequest)
+	},
+}
+
+func NewBidResponse() *BidResponse {
+	return bidResponsePool.Get().(*BidResponse)
+}
+
+func FreeBidResponse(br *BidResponse) {
+	br.Reset()
+	bidResponsePool.Put(br)
 }
 
 // Validate required attributes

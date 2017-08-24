@@ -12,3 +12,17 @@ type Video struct {
 	Protocols   []int             `json:"protocols,omitempty"`   // Video bid response protocols
 	Ext         openrtb.Extension `json:"ext,omitempty"`
 }
+
+func (v *Video) Reset() {
+	v.MinDuration = 0
+	v.MaxDuration = 0
+	if v.Mimes != nil {
+		v.Mimes = v.Mimes[:0]
+	}
+	if v.Protocols != nil {
+		v.Protocols = v.Protocols[:0]
+	}
+	if v.Ext != nil {
+		v.Ext = v.Ext[:0]
+	}
+}

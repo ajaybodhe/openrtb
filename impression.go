@@ -120,4 +120,3 @@ func (imp *Impression) Validate() error {
 
 	return nil
 }
- 

@@ -58,7 +58,7 @@ func (vid *Video) Reset() {
 	vid.Pos = 0
 	vid.Placement = 0
 	if vid.CompanionAd != nil {
-		for i:=0; i<len(vid.CompanionAd); i ++ {
+		for i := 0; i < len(vid.CompanionAd); i++ {
 			(&vid.CompanionAd[i]).Reset()
 		}
 		vid.CompanionAd = vid.CompanionAd[:0]
@@ -66,7 +66,7 @@ func (vid *Video) Reset() {
 	if vid.Delivery != nil {
 		vid.Delivery = vid.Delivery[:0]
 	}
-	if vid.Ext  != nil {
+	if vid.Ext != nil {
 		vid.Ext = vid.Ext[:0]
 	}
 	if vid.PlaybackMethod != nil {
@@ -97,7 +97,6 @@ func (vid *Video) Reset() {
 		vid.Mimes = vid.Mimes[:0]
 	}
 }
-
 
 //var videoPool = sync.Pool{
 //	New: func() interface{} {

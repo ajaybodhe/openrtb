@@ -17,7 +17,6 @@ type Native struct {
 	Ext     Extension `json:"ext,omitempty"`
 }
 
-
 func (nt *Native) Reset() {
 	if nt.Request != nil {
 		nt.Request = nt.Request[:0]

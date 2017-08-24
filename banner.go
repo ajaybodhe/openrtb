@@ -31,7 +31,7 @@ func (bn *Banner) Reset() {
 	bn.W = 0
 	bn.H = 0
 	if bn.Format != nil {
-		for i:=0; i<len(bn.Format); i++ {
+		for i := 0; i < len(bn.Format); i++ {
 			(&bn.Format[i]).Reset()
 		}
 		bn.Format = bn.Format[:0]
@@ -58,11 +58,10 @@ func (bn *Banner) Reset() {
 	if bn.Api != nil {
 		bn.Api = bn.Api[:0]
 	}
-	if bn.Ext !=nil {
+	if bn.Ext != nil {
 		bn.Ext = bn.Ext[:0]
 	}
 }
-
 
 //var bannerPool = sync.Pool{
 //	New: func() interface{} {

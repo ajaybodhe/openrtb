@@ -35,9 +35,10 @@ type Content struct {
 	Data               []Data    `json:"data,omitempty"`               // Additional content data.
 	Ext                Extension `json:"ext,omitempty"`
 }
+
 func (c *Content) Reset() {
 	if c.Data != nil {
-		for i:=0; i<len(c.Data); i++ {
+		for i := 0; i < len(c.Data); i++ {
 			(&c.Data[i]).Reset()
 		}
 		c.Data = c.Data[:0]

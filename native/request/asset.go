@@ -17,3 +17,23 @@ type Asset struct {
 	Data     *Data             `json:"data,omitempty"`     // Data object for brand name, description, ratings, prices etc.
 	Ext      openrtb.Extension `json:"ext,omitempty"`
 }
+
+func (a *Asset) Reset() {
+	a.ID = 0
+	a.Required = 0
+	if a.Title != nil {
+		a.Title.Reset()
+	}
+	if a.Image != nil {
+		a.Image.Reset()
+	}
+	if a.Video != nil {
+		a.Video.Reset()
+	}
+	if a.Data != nil {
+		a.Data.Reset()
+	}
+	if a.Ext != nil {
+		a.Ext = a.Ext[:0]
+	}
+}

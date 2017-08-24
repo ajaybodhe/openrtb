@@ -51,10 +51,10 @@ func (app *App) Reset() {
 		app.SectionCat = app.SectionCat[:0]
 	}
 	if app.PageCat != nil {
-		app.PageCat= app.PageCat[:0]
+		app.PageCat = app.PageCat[:0]
 	}
 	if app.Cat != nil {
-		app.Cat= app.Cat[:0]
+		app.Cat = app.Cat[:0]
 	}
 	app.PrivacyPolicy = nil
 	app.Keywords = ""
@@ -67,14 +67,13 @@ func (app *App) Reset() {
 	app.Paid = 0
 }
 
-
 var appPool = sync.Pool{
 	New: func() interface{} {
 		return new(App)
 	},
 }
 
-func NewApp() *App{
+func NewApp() *App {
 	return appPool.Get().(*App)
 }
 
@@ -107,10 +106,10 @@ func (s *Site) Reset() {
 		s.SectionCat = s.SectionCat[:0]
 	}
 	if s.PageCat != nil {
-		s.PageCat= s.PageCat[:0]
+		s.PageCat = s.PageCat[:0]
 	}
 	if s.Cat != nil {
-		s.Cat= s.Cat[:0]
+		s.Cat = s.Cat[:0]
 	}
 	s.PrivacyPolicy = nil
 	s.Keywords = ""
@@ -123,14 +122,13 @@ func (s *Site) Reset() {
 	s.Search = ""
 }
 
-
 var sitePool = sync.Pool{
 	New: func() interface{} {
 		return new(Site)
 	},
 }
 
-func NewSite() *Site{
+func NewSite() *Site {
 	return sitePool.Get().(*Site)
 }
 
