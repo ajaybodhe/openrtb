@@ -115,6 +115,9 @@ func NewBidRequest() *BidRequest {
 }
 
 func FreeBidRequest(br *BidRequest) {
+	if br == nil {
+		return
+	}
 	br.Reset()
 	bidRequestPool.Put(br)
 }

@@ -114,6 +114,9 @@ func NewNativeRequest() *Request {
 }
 
 func FreeNativeRequest(nr *Request) {
+	if nr == nil {
+		return
+	}
 	nr.Reset()
 	nativeRequestPool.Put(nr)
 }

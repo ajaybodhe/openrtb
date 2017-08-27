@@ -46,6 +46,9 @@ func NewNativeRequest() *Response {
 }
 
 func FreeNativeRequest(nr *Response) {
+	if nr == nil {
+		return
+	}
 	nr.Reset()
 	nativeRequestPool.Put(nr)
 }

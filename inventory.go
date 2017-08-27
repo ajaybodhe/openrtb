@@ -78,6 +78,9 @@ func NewApp() *App {
 }
 
 func FreeApp(app *App) {
+	if app != nil {
+		return
+	}
 	app.Reset()
 	appPool.Put(app)
 }
@@ -133,6 +136,9 @@ func NewSite() *Site {
 }
 
 func FreeSite(s *Site) {
+	if s == nil {
+		return
+	}
 	s.Reset()
 	sitePool.Put(s)
 }

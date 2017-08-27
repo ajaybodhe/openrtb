@@ -57,6 +57,9 @@ func NewBidResponse() *BidResponse {
 }
 
 func FreeBidResponse(br *BidResponse) {
+	if br == nil {
+		return
+	}
 	br.Reset()
 	bidResponsePool.Put(br)
 }
