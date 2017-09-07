@@ -48,7 +48,7 @@ func (br *BidResponse) Reset() {
 
 var bidResponsePool = sync.Pool{
 	New: func() interface{} {
-		return new(BidRequest)
+		return new(BidResponse)
 	},
 }
 
