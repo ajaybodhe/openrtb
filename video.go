@@ -53,7 +53,7 @@ type jsonVideo Video
 func (v *Video) Validate() error {
 	if len(v.Mimes) == 0 {
 		return ErrInvalidVideoNoMimes
-	} else if v.Linearity == 0 {
+	} /*else if v.Linearity == 0 {
 		return ErrInvalidVideoNoLinearity
 	} else if v.MinDuration == 0 {
 		return ErrInvalidVideoNoMinDuration
@@ -61,7 +61,7 @@ func (v *Video) Validate() error {
 		return ErrInvalidVideoNoMaxDuration
 	} else if v.Protocol == 0 && len(v.Protocols) == 0 {
 		return ErrInvalidVideoNoProtocols
-	}
+	}*/
 	return nil
 }
 

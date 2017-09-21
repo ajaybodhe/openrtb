@@ -56,10 +56,11 @@ func (imp *Impression) Validate() error {
 		return ErrInvalidImpNoID
 	}
 
+/*
 	if count := imp.assetCount(); count > 1 {
 		return ErrInvalidImpMultiAssets
 	}
-
+*/
 	if imp.Video != nil {
 		if err := imp.Video.Validate(); err != nil {
 			return err
